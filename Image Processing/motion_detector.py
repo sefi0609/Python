@@ -44,10 +44,10 @@ while True:
             times.append(datetime.datetime.now())
         break
 #creating a cvs file of the data we collected - when moving object detected and when they are not + number of frames
+df = df.append({'Frames':i},ignore_index = True)   
 for i in range(0,len(times),2):
     df = df.append({'Start':times[i],'End':times[i+1]},ignore_index = True)
     
-df = df.append({'Frames':i},ignore_index = True)   
 df.to_csv('Times.csv')
 
 cv2.destroyAllWindows()
