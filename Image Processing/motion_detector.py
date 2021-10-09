@@ -6,7 +6,7 @@ i = 1
 first_frame = None
 status_list = [0]
 times = []
-df = pandas.DataFrame(columns = ['Start','End','Frames']) 
+df = pandas.DataFrame(columns = ['Start','End']) 
 #capturing frames and displaying them
 while True:
     i += 1
@@ -34,6 +34,8 @@ while True:
         (x,y,w,h) = cv2.boundingRect(contour)
         cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),4)
     status_list.append(status)
+    #To save memory
+    status_list = status_list[-2:]
     if status_list[-1] != status_list[-2]:
         times.append(datetime.datetime.now())
     #showing the color frames with a rectangle on moving object   
@@ -43,8 +45,7 @@ while True:
         if status == 1:
             times.append(datetime.datetime.now())
         break
-#creating a cvs file of the data we collected - when moving object detected and when they are not + number of frames
-df = df.append({'Frames':i},ignore_index = True)   
+#creating a cvs file of the data we collected - when moving object detected and when they are not + number of frames 
 for i in range(0,len(times),2):
     df = df.append({'Start':times[i],'End':times[i+1]},ignore_index = True)
     
