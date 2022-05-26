@@ -23,6 +23,7 @@ def main():
     ClientDataSocket.settimeout(30)
     portControl = 8000
     portData = 8001
+    # a unique MAC address for every computer
     identifier = hex(uuid.getnode())
 
     # for localhost enter 127.0.0.1 or 'localhost', if the server and the client are on the same computer
