@@ -7,6 +7,6 @@ I have taken in consideration that clients are using different computers.
 If it is not the case a simple change in my script will suffice.
 The Data Structure, that I have chosen to save all the clients data is a set, to save space and time,
 No need to check if the tuple is in the set just add it and no need to remove tuples to save space, 
-if the client wants to send anouther message it will save time.
+If the client wants to send anouther message it will save time.
 
 Hope you enjoy my solution :-)
