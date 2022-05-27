@@ -8,5 +8,8 @@ If it is not the case a simple change in my script will suffice.
 The Data Structure, that I have chosen to save all the clients data is a set, to save space and time,
 No need to check if the tuple is in the set just add it and no need to remove tuples to save space, 
 If the client wants to send anouther message it will save time.
+Data structures have a tendency to grow rather than shrink,
+so I do not delete data from the set.
+I used a set so I would not have to check if the information is in the data structure or not.
 
 Hope you enjoy my solution :-)
