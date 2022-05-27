@@ -47,7 +47,7 @@ def main():
     # and receiving the unique server code on the control channel
     try:
         ClientControlSocket.sendall(str.encode(identifier))
-        code =  ClientControlSocket.recv(2048)
+        code = ClientControlSocket.recv(2048)
     except socket.error as e:
         print(str(e))
         # error - exit the main
