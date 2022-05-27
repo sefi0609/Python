@@ -2,6 +2,7 @@ import socket
 from _thread import *
 import threading
 import hashlib
+import time
 
 
 def main():
@@ -76,6 +77,8 @@ def control_channel(connection):
 
 # handler for data channel port 8001
 def data_channel(connection):
+    # wait for control tread to finish
+    time.sleep(4)
     # this flag indicates if the message was written to the log file
     flag = False
     message = connection.recv(2048)
