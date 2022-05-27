@@ -78,7 +78,7 @@ def control_channel(connection):
 # handler for data channel port 8001
 def data_channel(connection):
     # wait for control tread to finish
-    time.sleep(4)
+    time.sleep(2)
     # this flag indicates if the message was written to the log file
     flag = False
     message = connection.recv(2048)
