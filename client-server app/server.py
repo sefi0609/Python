@@ -46,7 +46,7 @@ def main():
 # clients is a set of tuples so if a client is already in the set, he will not be added again
 # for clients that wants to connect to the server several times - the MAC and code will be the same
 # I used a set to save space and time - just adding no need to remove or to check if the client is already in the set
-clients = {}
+clients = set()
 # a lock for mutual exclusion between threads
 lock = threading.Lock()
 
