@@ -62,7 +62,7 @@ def write_to_log(message):
 def control_channel(connection):
     unique = connection.recv(2048)
     # use the sha-1 hash function to generate a unique code, a better hash function than the default one (hash())
-    code = str(hashlib.sha1(unique).hexdigest())
+    code = hashlib.sha1(unique).hexdigest()
     # send the code to the client
     connection.sendall(str.encode(code))
     # encode the code to bytes to match the code received from the data channel
