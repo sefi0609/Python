@@ -30,7 +30,6 @@ def main():
 
     # The server is always working, need to stop it manually
     while True:
-        print(clients)
         # get the client sockets
         clientControl, addressC = ServerControlSocket.accept()
         clientData, addressD = ServerDataSocket.accept()
