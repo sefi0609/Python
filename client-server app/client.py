@@ -8,7 +8,7 @@ def validate_ip_address(address):
     if address == 'localhost':
         return True
     try:
-        ip = ipaddress.ip_address(address)
+        ipaddress.ip_address(address)
         return True
     except ValueError:
         print(f'{address} is an invalid IP address')
