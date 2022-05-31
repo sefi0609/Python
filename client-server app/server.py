@@ -55,7 +55,7 @@ def write_to_log(message):
     with open('logfile.txt', 'a') as logFile:
         logFile.write(message + '\n')
 
-
+# handler for control and data channels
 def channels_handler(control_channel, data_channel):
     # handler for control channel port 8000
     unique = control_channel.recv(2048)
