@@ -2,6 +2,7 @@ import socket
 from _thread import *
 import threading
 import hashlib
+import sys
 
 
 def main():
@@ -22,7 +23,7 @@ def main():
     except socket.error as e:
         print("can't create a socket")
         print(str(e))
-        return
+        sys.exit(1)
 
     # The server is listening on the ports for clients
     server_control_socket.listen()
@@ -69,7 +70,8 @@ def channels_handler(control_channel, data_channel):
     except socket.error as e:
         print("can't receive or send on control channel")
         print(str(e))
-        return
+        sys.exit(1)
+
     # encode the code to bytes to match the code received from the data channel
     code = code.encode()
     # protect mutual resource
@@ -86,7 +88,8 @@ def channels_handler(control_channel, data_channel):
     except socket.error as e:
         print("can't receive on data channel")
         print(str(e))
-        return
+        sys.exit(1)
+
     message = message.split()
     # message = message + ' ' + identifier + ' ' + str(code)
     # message[0] = message
