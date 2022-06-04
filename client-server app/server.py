@@ -57,12 +57,17 @@ def write_to_log(message):
 
 # handler for control and data channels
 def channels_handler(control_channel, data_channel):
-    # handler for control channel port 8000
-    unique = control_channel.recv(2048)
-    # use the sha-1 hash function to generate a unique code, a better hash function than the default one (hash())
-    code = hashlib.sha1(unique).hexdigest()
-    # send the code to the client
-    control_channel.sendall(str.encode(code))
+    try:
+        # handler for control channel port 8000
+        unique = control_channel.recv(2048)
+        # use the sha-1 hash function to generate a unique code, a better hash function than the default one (hash())
+        code = hashlib.sha1(unique).hexdigest()
+        # send the code to the client
+        control_channel.sendall(str.encode(code))
+    except socket.error as e:
+        print("can't receive or send on control channel")
+        print(str(e))
+        return
     # encode the code to bytes to match the code received from the data channel
     code = code.encode()
     # protect mutual resource
@@ -74,7 +79,12 @@ def channels_handler(control_channel, data_channel):
     # handler for data channel port 8001
     # this flag indicates if the message was written to the log file
     flag = False
-    message = data_channel.recv(2048)
+    try:
+        message = data_channel.recv(2048)
+    except socket.error as e:
+        print("can't receive on data channel")
+        print(str(e))
+        return
     message = message.split()
     # message = message + ' ' + identifier + ' ' + str(code)
     # message[0] = message
@@ -91,11 +101,15 @@ def channels_handler(control_channel, data_channel):
             write_to_log(mess)
             break
     lock.release()
-    if not flag:
-        data_channel.sendall(str.encode('error'))
-    else:
-        data_channel.sendall(str.encode('success'))
-        data_channel.close()
+    try:
+        if not flag:
+            data_channel.sendall(str.encode('error'))
+        else:
+            data_channel.sendall(str.encode('success'))
+    except socket.error as e:
+        print("can't send on data channel")
+        print(str(e))
+    data_channel.close()
 
 
 if __name__ == '__main__':
