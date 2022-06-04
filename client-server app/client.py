@@ -16,11 +16,6 @@ def validate_ip_address(address):
 
 
 def main():
-    # TCP protocol by default
-    client_control_socket = socket.socket()
-    client_data_socket = socket.socket()
-    client_control_socket.settimeout(30)
-    client_data_socket.settimeout(30)
     port_control = 8000
     port_data = 8001
     identifier = hex(uuid.getnode())
@@ -37,6 +32,11 @@ def main():
     # connecting to control and data channels
     print('Waiting for connection response')
     try:
+        # TCP protocol by default
+        client_control_socket = socket.socket()
+        client_data_socket = socket.socket()
+        client_control_socket.settimeout(30)
+        client_data_socket.settimeout(30)
         client_control_socket.connect((host, port_control))
         client_data_socket.connect((host, port_data))
         # sending the unique MAC address
@@ -44,7 +44,7 @@ def main():
         client_control_socket.sendall(str.encode(identifier))
         code = client_control_socket.recv(2048)
     except socket.error as e:
-        print("can't send or receive on control channel")
+        print("Something want wrong, exiting...")
         print(str(e))
         sys.exit(1)
     
