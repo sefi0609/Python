@@ -1,7 +1,7 @@
 import socket
 import uuid
 import ipaddress
-
+import sys
 
 # check if an IP address is valid (IPv4 or IPv6)
 def validate_ip_address(address):
@@ -44,9 +44,9 @@ def main():
         client_control_socket.sendall(str.encode(identifier))
         code = client_control_socket.recv(2048)
     except socket.error as e:
+        print("can't send or receive on control channel")
         print(str(e))
-        # error - exit the main
-        return
+        sys.exit(1)
     
     # sending the message, MAC and the code from the server
     # and receiving a conformation (success or error) on the data channel
@@ -55,9 +55,9 @@ def main():
         client_data_socket.sendall(str.encode(send))
         answer = client_data_socket.recv(2048)
     except socket.error as e:
+        print("can't send or receive on data channel")
         print(str(e))
-        # error - exit the main
-        return
+        sys.exit(1)
 
     # returning an answer to the client
     if answer == b'error':
