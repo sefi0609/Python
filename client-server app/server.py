@@ -5,9 +5,6 @@ import hashlib
 
 
 def main():
-    # TCP protocol by default
-    server_control_socket = socket.socket()
-    server_data_socket = socket.socket()
     # the server will start working at the computer that it is running on
     host = 'localhost'
     port_control = 8000
@@ -17,9 +14,13 @@ def main():
     # connect the host and ports to the socket server
     # for both control and data channels
     try:
+        # TCP protocol by default
+        server_control_socket = socket.socket()
+        server_data_socket = socket.socket()
         server_control_socket.bind((host, port_control))
         server_data_socket.bind((host, port_data))
     except socket.error as e:
+        print("can't create a socket")
         print(str(e))
         return
 
