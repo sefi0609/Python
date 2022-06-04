@@ -39,25 +39,25 @@ def main():
     try:
         client_control_socket.connect((host, port_control))
         client_data_socket.connect((host, port_data))
-    except socket.error as e:
-        print(str(e))
-        # error - exit the main
-        return
-    # sending the unique MAC address
-    # and receiving the unique server code on the control channel
-    try:
+        # sending the unique MAC address
+        # and receiving the unique server code on the control channel
         client_control_socket.sendall(str.encode(identifier))
         code = client_control_socket.recv(2048)
     except socket.error as e:
         print(str(e))
         # error - exit the main
         return
-
+    
     # sending the message, MAC and the code from the server
     # and receiving a conformation (success or error) on the data channel
     send = message + ' ' + identifier + ' ' + code.decode()
-    client_data_socket.sendall(str.encode(send))
-    answer = client_data_socket.recv(2048)
+    try:
+        client_data_socket.sendall(str.encode(send))
+        answer = client_data_socket.recv(2048)
+    except socket.error as e:
+        print(str(e))
+        # error - exit the main
+        return
 
     # returning an answer to the client
     if answer == b'error':
