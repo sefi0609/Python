@@ -50,7 +50,7 @@ def main():
     # connecting to control and data channels
     print('Waiting for connection response')
     try:
-        # TCP protocol by default
+        # TCP protocol by default, try to catch an exception 
         client_control_socket = socket.socket()
         client_data_socket = socket.socket()
         client_control_socket.settimeout(30)
