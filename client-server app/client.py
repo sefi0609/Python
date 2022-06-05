@@ -15,7 +15,7 @@ def validate_ip_address(address):
         print(f'{address} is an invalid IP address')
         return False
 
-
+# send message to the server, check if the message sent
 def send_to_server(channel, message):
     try:
         channel.sendall(str.encode(message))
@@ -23,7 +23,7 @@ def send_to_server(channel, message):
         print("can't send on this channel")
         sys.exit(1)
 
-
+# receive a message from the server, check if the message received
 def receive_from_server(channel):
     try:
         return channel.recv(2048)
