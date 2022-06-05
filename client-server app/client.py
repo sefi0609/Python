@@ -3,6 +3,7 @@ import uuid
 import ipaddress
 import sys
 
+
 # check if an IP address is valid (IPv4 or IPv6)
 def validate_ip_address(address):
     if address == 'localhost':
@@ -13,6 +14,23 @@ def validate_ip_address(address):
     except ValueError:
         print(f'{address} is an invalid IP address')
         return False
+
+
+def send_to_server(channel, message):
+    try:
+        channel.sendall(str.encode(message))
+    except socket.error:
+        print("can't send on this channel")
+        sys.exit(1)
+
+
+def receive_from_server(channel):
+    try:
+        return channel.recv(2048)
+    except socket.error as e:
+        print("can't receive on this channel")
+        print(str(e))
+        sys.exit(1)
 
 
 def main():
@@ -39,25 +57,20 @@ def main():
         client_data_socket.settimeout(30)
         client_control_socket.connect((host, port_control))
         client_data_socket.connect((host, port_data))
-        # sending the unique MAC address
-        # and receiving the unique server code on the control channel
-        client_control_socket.sendall(str.encode(identifier))
-        code = client_control_socket.recv(2048)
     except socket.error as e:
-        print("Something want wrong, exiting...")
+        print("Something want wrong with creating a socket, exiting...")
         print(str(e))
         sys.exit(1)
-    
+
+    # sending the unique MAC address
+    # and receiving the unique server code on the control channel
+    send_to_server(client_control_socket, identifier)
+    code = receive_from_server(client_control_socket)
     # sending the message, MAC and the code from the server
     # and receiving a conformation (success or error) on the data channel
     send = message + ' ' + identifier + ' ' + code.decode()
-    try:
-        client_data_socket.sendall(str.encode(send))
-        answer = client_data_socket.recv(2048)
-    except socket.error as e:
-        print("can't send or receive on data channel")
-        print(str(e))
-        sys.exit(1)
+    send_to_server(client_data_socket, send)
+    answer = receive_from_server(client_data_socket)
 
     # returning an answer to the client
     if answer == b'error':
@@ -72,4 +85,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
