@@ -22,7 +22,7 @@ def main():
         server_data_socket.bind((host, port_data))
     except socket.error as e:
         print("can't create a socket")
-        print(str(e))
+        print(str(e)) 
         sys.exit(1)
 
     # The server is listening on the ports for clients
@@ -52,20 +52,24 @@ clients = set()
 lock = threading.Lock()
 
 
+# send message to the client, check if the message sent
 def send_to_client(channel, message):
     try:
         channel.sendall(str.encode(message))
     except socket.error:
         print("can't send on this channel")
+        # exit the thread, not the main
         sys.exit(1)
 
-
+        
+# receive a message from the client, check if the message received
 def receive_from_client(channel):
     try:
         return channel.recv(2048)
     except socket.error as e:
         print("can't receive on this channel")
         print(str(e))
+        # exit the thread, not the main
         sys.exit(1)
 
 
