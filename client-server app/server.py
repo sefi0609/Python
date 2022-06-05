@@ -15,7 +15,7 @@ def main():
     # connect the host and ports to the socket server
     # for both control and data channels
     try:
-        # TCP protocol by default
+        # TCP protocol by default, try to catch an exception 
         server_control_socket = socket.socket()
         server_data_socket = socket.socket()
         server_control_socket.bind((host, port_control))
@@ -51,7 +51,7 @@ clients = set()
 # a lock for mutual exclusion between threads
 lock = threading.Lock()
 
-
+# send a message to the client, check if the message sent
 def send_to_client(channel, message):
     try:
         channel.sendall(str.encode(message))
@@ -59,7 +59,7 @@ def send_to_client(channel, message):
         print("can't send on this channel")
         sys.exit(1)
 
-
+# receive a message from the client, check if the message received
 def receive_from_client(channel):
     try:
         return channel.recv(2048)
