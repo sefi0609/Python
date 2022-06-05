@@ -4,35 +4,6 @@ import ipaddress
 import sys
 
 
-# check if an IP address is valid (IPv4 or IPv6)
-def validate_ip_address(address):
-    if address == 'localhost':
-        return True
-    try:
-        ipaddress.ip_address(address)
-        return True
-    except ValueError:
-        print(f'{address} is an invalid IP address')
-        return False
-
-# send message to the server, check if the message sent
-def send_to_server(channel, message):
-    try:
-        channel.sendall(str.encode(message))
-    except socket.error:
-        print("can't send on this channel")
-        sys.exit(1)
-
-# receive a message from the server, check if the message received
-def receive_from_server(channel):
-    try:
-        return channel.recv(2048)
-    except socket.error as e:
-        print("can't receive on this channel")
-        print(str(e))
-        sys.exit(1)
-
-
 def main():
     port_control = 8000
     port_data = 8001
@@ -81,6 +52,37 @@ def main():
     # close all resources
     client_control_socket.close()
     client_data_socket.close()
+    
+
+# check if an IP address is valid (IPv4 or IPv6)
+def validate_ip_address(address):
+    if address == 'localhost':
+        return True
+    try:
+        ipaddress.ip_address(address)
+        return True
+    except ValueError:
+        print(f'{address} is an invalid IP address')
+        return False
+
+    
+# send message to the server, check if the message sent
+def send_to_server(channel, message):
+    try:
+        channel.sendall(str.encode(message))
+    except socket.error:
+        print("can't send on this channel")
+        sys.exit(1)
+
+        
+# receive a message from the server, check if the message received
+def receive_from_server(channel):
+    try:
+        return channel.recv(2048)
+    except socket.error as e:
+        print("can't receive on this channel")
+        print(str(e))
+        sys.exit(1)
 
 
 if __name__ == '__main__':
