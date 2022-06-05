@@ -52,26 +52,37 @@ clients = set()
 lock = threading.Lock()
 
 
+def send_to_client(channel, message):
+    try:
+        channel.sendall(str.encode(message))
+    except socket.error:
+        print("can't send on this channel")
+        sys.exit(1)
+
+
+def receive_from_client(channel):
+    try:
+        return channel.recv(2048)
+    except socket.error as e:
+        print("can't receive on this channel")
+        print(str(e))
+        sys.exit(1)
+
+
 # write the message to the log file
 def write_to_log(message):
     with open('logfile.txt', 'a') as logFile:
         logFile.write(message + '\n')
 
-        
+
 # handler for control and data channels
 def channels_handler(control_channel, data_channel):
-    try:
-        # handler for control channel port 8000
-        unique = control_channel.recv(2048)
-        # use the sha-1 hash function to generate a unique code, a better hash function than the default one (hash())
-        code = hashlib.sha1(unique).hexdigest()
-        # send the code to the client
-        control_channel.sendall(str.encode(code))
-    except socket.error as e:
-        print("can't receive or send on control channel")
-        print(str(e))
-        sys.exit(1)
-
+    # handling the control channel port 8000
+    unique = receive_from_client(control_channel)
+    # use the sha-1 hash function to generate a unique code, a better hash function than the default one (hash())
+    code = hashlib.sha1(unique).hexdigest()
+    # send the code to the client
+    send_to_client(control_channel, code)
     # encode the code to bytes to match the code received from the data channel
     code = code.encode()
     # protect mutual resource
@@ -80,16 +91,10 @@ def channels_handler(control_channel, data_channel):
     lock.release()
     control_channel.close()
 
-    # handler for data channel port 8001
+    # handling the data channel port 8001
     # this flag indicates if the message was written to the log file
     flag = False
-    try:
-        message = data_channel.recv(2048)
-    except socket.error as e:
-        print("can't receive on data channel")
-        print(str(e))
-        sys.exit(1)
-
+    message = receive_from_client(data_channel)
     message = message.split()
     # message = message + ' ' + identifier + ' ' + str(code)
     # message[0] = message
@@ -106,17 +111,12 @@ def channels_handler(control_channel, data_channel):
             write_to_log(mess)
             break
     lock.release()
-    try:
-        if not flag:
-            data_channel.sendall(str.encode('error'))
-        else:
-            data_channel.sendall(str.encode('success'))
-    except socket.error as e:
-        print("can't send on data channel")
-        print(str(e))
+    if not flag:
+        send_to_client(data_channel, 'error')
+    else:
+        send_to_client(data_channel, 'success')
     data_channel.close()
 
 
 if __name__ == '__main__':
     main()
-    
