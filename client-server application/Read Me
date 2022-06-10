@@ -10,7 +10,6 @@ No need to check if the tuple is in the set just add it and no need to remove tu
 If the client wants to send anouther message it will save time - on checking.
 Data structures have a tendency to grow rather than shrink,
 so I do not delete data from the set.
-I used a set so I would not have to check if the information is in the data structure or not.
 
 (for a more complex client-server application, including GUI, in java please see: https://github.com/sefi0609/Java/tree/main/MultiChat)
 
