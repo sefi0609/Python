@@ -6,7 +6,7 @@ So if two different computers have the same seed they will generator the same nu
 I have taken in consideration that clients are using different computers.
 If it is not the case a simple change in my script will suffice.
 The Data Structure, that I have chosen to save all the clients data is a set, to save space and time,
-No need to check if the tuple is in the set just add it and no need to remove tuples to save space, 
+No need to check if the tuple is in the set (python check's it) just add it and no need to remove tuples to save space, 
 If the client wants to send anouther message it will save time - on checking.
 Data structures have a tendency to grow rather than shrink,
 so I do not delete data from the set.
