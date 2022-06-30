@@ -1,5 +1,4 @@
 Hello and welcom to my GitHub,
-I solved problem 3 on the technical task Yulia sent me,
 I used the unique MAC address from every computer,
 Because the random generator (its pseudorandom) in every computer depends on a seed,
 So if two different computers have the same seed they will generator the same numbers.
