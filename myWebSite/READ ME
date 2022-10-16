@@ -1,5 +1,6 @@
 
 Hello and welcome to myWebSite.
+This is a fullstack development project.
 I built this site using django framework for learning purposes.
 The first page (app) is for general information and registeration or login.
 After the registeration you have a todo-list and a calender for your day to day activities.
