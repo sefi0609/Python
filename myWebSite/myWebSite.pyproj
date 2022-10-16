@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <Name>myWebSite</Name>
+    <RootNamespace>myWebSite</RootNamespace>
+    <TestFramework>Pytest</TestFramework>
+    <InterpreterId>
+    </InterpreterId>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>6b70206b-eea0-4ee9-b693-f7b323809f2b</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectTypeGuids>{5F0BE9CA-D677-4A4D-8806-6076C0FAAD37};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <StartupFile>manage.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <WebBrowserUrl>http://localhost</WebBrowserUrl>
+    <LaunchProvider>Django launcher</LaunchProvider>
+    <DjangoSettingsModule>myWebSite.settings</DjangoSettingsModule>
+    <OutputPath>.</OutputPath>
+    <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="apps\calendar_app\admin.py" />
+    <Compile Include="apps\calendar_app\apps.py" />
+    <Compile Include="apps\calendar_app\migrations\__init__.py" />
+    <Compile Include="apps\calendar_app\models.py" />
+    <Compile Include="apps\calendar_app\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="apps\calendar_app\utils.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="apps\calendar_app\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="apps\calendar_app\views.py" />
+    <Compile Include="apps\calendar_app\__init__.py" />
+    <Compile Include="apps\login_app\migrations\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="apps\login_app\models.py" />
+    <Compile Include="apps\login_app\urls.py" />
+    <Compile Include="apps\login_app\views.py" />
+    <Compile Include="apps\login_app\__init__.py" />
+    <Compile Include="apps\login_app\apps.py" />
+    <Compile Include="apps\todo_list_app\migrations\__init__.py" />
+    <Compile Include="apps\todo_list_app\__init__.py" />
+    <Compile Include="manage.py" />
+    <Compile Include="myWebSite\settings.py" />
+    <Compile Include="myWebSite\urls.py" />
+    <Compile Include="myWebSite\wsgi.py" />
+    <Compile Include="apps\todo_list_app\admin.py" />
+    <Compile Include="apps\todo_list_app\apps.py" />
+    <Compile Include="apps\todo_list_app\models.py" />
+    <Compile Include="apps\todo_list_app\urls.py" />
+    <Compile Include="apps\todo_list_app\views.py" />
+    <Compile Include="myWebSite\__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="apps\calendar_app\" />
+    <Folder Include="apps\calendar_app\migrations\" />
+    <Folder Include="apps\calendar_app\static\" />
+    <Folder Include="apps\calendar_app\templates\" />
+    <Folder Include="apps\calendar_app\templates\calendar_app\" />
+    <Folder Include="apps\login_app\" />
+    <Folder Include="apps\login_app\migrations\" />
+    <Folder Include="apps\login_app\templates\" />
+    <Folder Include="apps\todo_list_app\static\" />
+    <Folder Include="apps\todo_list_app\templates\todo_list_app\" />
+    <Folder Include="myWebSite\" />
+    <Folder Include="apps\" />
+    <Folder Include="apps\todo_list_app\" />
+    <Folder Include="apps\todo_list_app\migrations\" />
+    <Folder Include="apps\todo_list_app\templates\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="apps\calendar_app\static\Stylesheet2.css" />
+    <Content Include="apps\calendar_app\templates\calendar_app\calendar.html" />
+    <Content Include="apps\calendar_app\templates\base2.html" />
+    <Content Include="apps\calendar_app\templates\calendar_app\new_event.html" />
+    <Content Include="apps\calendar_app\templates\calendar_app\event_confirm_delete.html" />
+    <Content Include="apps\calendar_app\templates\calendar_app\update_event.html" />
+    <Content Include="apps\login_app\templates\logout.html" />
+    <Content Include="apps\login_app\templates\login.html" />
+    <Content Include="apps\login_app\templates\index.html" />
+    <Content Include="apps\login_app\templates\registeration.html" />
+    <Content Include="apps\login_app\templates\contact.html" />
+    <Content Include="apps\login_app\templates\about.html" />
+    <Content Include="apps\todo_list_app\static\Stylesheet1.css" />
+    <Content Include="apps\todo_list_app\templates\todo_list_app\todolist_form.html" />
+    <Content Include="apps\todo_list_app\templates\todo_list_app\todoitem_form.html" />
+    <Content Include="apps\todo_list_app\templates\todo_list_app\todolist_confirm_delete.html" />
+    <Content Include="apps\todo_list_app\templates\todo_list_app\todoitem_confirm_delete.html" />
+    <Content Include="apps\todo_list_app\templates\todo_list_app\all_lists.html" />
+    <Content Include="apps\todo_list_app\templates\base.html" />
+    <Content Include="requirements.txt" />
+    <Content Include="db.sqlite3" />
+    <Content Include="apps\todo_list_app\templates\todo_list_app\todo_list.html" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Django.targets" />
+  <!-- Specify pre- and post-build commands in the BeforeBuild and 
+       AfterBuild targets below. -->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
