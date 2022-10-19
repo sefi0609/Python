@@ -8,8 +8,7 @@ from .models import *
 
 def gallery(request):
     category = request.GET.get('category')
-    #if category is not None:
-    #    print(category)
+
     if category is None:
         photos = Photo.objects.filter(category__user=request.user)
     else:
